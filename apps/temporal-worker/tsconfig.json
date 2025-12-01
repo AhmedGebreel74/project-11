@@ -1,16 +1,17 @@
 // apps/temporal-worker/tsconfig.json
 {
+  "$schema": "https://json.schemastore.org/tsconfig.json",
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "ignoreDeprecations": "5.0",
     "outDir": "../../dist/out-tsc",
-    "module": "commonjs",
+    "module": "Node16",
     "target": "es2017",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     
-    // ✨ تأكد من إضافة هذا السطر هنا ✨
     "rootDir": "../../"
     
   },

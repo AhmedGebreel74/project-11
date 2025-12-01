@@ -1,9 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "ignoreDeprecations": "5.0",
     "outDir": "../../dist/out-tsc",
     "module": "commonjs",
     "types": ["jest", "node"]
   },
-  "include": ["jest.config.ts", "src/**/*.ts"]
+  "include": ["jest.config.ts", "src"]
 }

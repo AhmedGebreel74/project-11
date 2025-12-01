@@ -35,6 +35,14 @@ export class ReposController {
       return { workflowId: id, status: "completed" as const, result: { sha: r.sha } };
     } catch (e: any) {
       this.raiseTemporalUnavailable(e);
+
+      const message = String(e?.message ?? "").toLowerCase();
+
+      // If Temporal cannot find the workflow, surface a 404 instead of a 500.
+      if (message.includes("workflow not found")) {
+        throw new HttpException({ message: "workflow not found", workflowId: id }, HttpStatus.NOT_FOUND);
+      }
+
       const desc = await handle
         .describe()
         .catch((err) => {
@@ -44,8 +52,7 @@ export class ReposController {
       if (desc?.status?.name === "RUNNING") {
         return { workflowId: id, status: "running" as const };
       }
-      const msg = String(e?.message ?? "").toLowerCase();
-      if (msg.includes("ref not found")) {
+      if (message.includes("ref not found")) {
         throw new HttpException({ message: "invalid ref", error: e?.message ?? "ref not found" }, HttpStatus.UNPROCESSABLE_ENTITY);
       }
       throw new HttpException({ message: "workflow failed", error: e?.message ?? "unknown" }, HttpStatus.INTERNAL_SERVER_ERROR);

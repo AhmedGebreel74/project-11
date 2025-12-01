@@ -18,6 +18,7 @@
       "executor": "@nx/js:tsc",
       "options": {
         "outputPath": "dist/apps/temporal-worker",
+        "rootDir": "../../",
         "main": "apps/temporal-worker/src/main.ts",
         "tsConfig": "apps/temporal-worker/tsconfig.json",
         "assets": [],
