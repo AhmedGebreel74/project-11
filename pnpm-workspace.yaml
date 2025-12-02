@@ -8,3 +8,8 @@ onlyBuiltDependencies:
   - nx
   - protobufjs
   - unrs-resolver
+
+packages:
+  - 'apps/*'
+  - 'libs/*'
+  - 'shared-kernel/*'
